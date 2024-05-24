@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$primary-color: #3a9191;
+$secondary-color: #33777b;
+$danger-color: #FF3342;
+$default-color: #fff;
+$border-radius:5px;
+$transition: all ease-in-out 0.3s;
+
+body{
+    margin: 0;
+}
+
+*{
+    font-family: "Poppins", "Noto Sans TC", sans-serif;
+    letter-spacing: 1px;
+}
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: $default-color;
+}
+
+
+.toDoList{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+
+    .imgBox {
+        position: relative;
+        width: 50%;
+        animation: changeBg 10s infinite;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        @keyframes changeBg{
+            0%{
+                background-image: url(/src/assets/images/background_01.jpg);
+            }
+            25%{
+                background-image: url(/src/assets/images/background_02.jpg);
+            }
+            50%{
+                background-image: url(/src/assets/images/background_03.jpg);
+            }
+            75%{
+                background-image: url(/src/assets/images/background_04.jpg);
+            }
+            100%{
+                background-image: url(/src/assets/images/background_01.jpg);
+            }
+        }
+
+        &:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        .copyright{
+            position: absolute;
+            bottom: 10px;
+            left:50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: rgba(255, 255, 255, .3)
+        }
+    }
+}
+.toDoListBox {
+    position: relative;
+    padding: 20px 20px 60px;
+    width: 50%;
+    margin: 0 auto;
+    background-color:rgba(0, 0, 0, .85);
+    color: $default-color;
+
+    &:first-of-type{
+        margin-bottom: 10px;
+    }
+
+    h1{
+        font-size: 42px;
+        line-height: 46px;
+        font-weight: 200;
+        margin: 0 auto 20px;
+    }
+}
+
+.inputContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    input[type="text"] {
+        flex: 1;
+        height: 42px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        background-color: $default-color;
+        border: 2px solid $default-color;
+        border-radius: $border-radius;
+        transition: $transition;
+        font-size: 16px;
+
+        &::placeholder {
+            color: rgba(0, 0, 0, .3);
+            opacity: 1;
+          }
+          
+        &::-ms-input-placeholder {
+            color: rgba(0, 0, 0, .3);
+        }
+        
+        &:focus{
+            outline: none;
+            border-color: $primary-color;
+        }
+    }
+
+    .addItem {
+        padding: 10px 20px;
+        width: 42px;
+        height: 42px;
+        background-color: $primary-color;
+        background-image: url(/src/assets/images/add.svg);
+        background-position: center center;
+        background-size: 24px;
+        background-repeat: no-repeat;
+        color: $default-color;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+            background-color: $secondary-color;
+        }
+    }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: calc(100vh - 142px);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: transparent; 
+        border-radius: $border-radius;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, .4);
+        border-radius: $border-radius;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: $default-color; 
+    }
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+
+    &:hover{
+        transition: $transition;
+        background-color: rgba(0, 0, 0, .2);
+
+        .deleteBtn{
+            opacity: .5;
+
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+
+    span{
+        width: calc(100% - 124px);
+        text-align: left;
+    }
+
+    &.completed span {
+        text-decoration: line-through;
+        color: rgba(255, 255, 255, .4);
+    }
+
+    .checkBtn {
+        display: block;
+        position: relative;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+
+            &:checked ~ .checkmark {
+                background-color: $primary-color;
+                border-color: $primary-color;
+            }
+
+            &:checked ~ .checkmark:after {
+                display: block;
+            }
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, .3);
+            border-radius: $border-radius;
+            transition: $transition;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 1px;
+            top: 2px;
+            width: 24px;
+            height: 24px;
+            background-image: url(/src/assets/images/check.svg);
+            background-position: center center;
+            background-size: 24px;
+            background-repeat: no-repeat;
+        }
+
+        &:hover input ~ .checkmark {
+            border-color: $default-color;
+        }
+    }
+
+    .deleteBtn {
+        padding: 10px 20px;
+        width: 24px;
+        height: 24px;
+        background-image: url(/src/assets/images/delete.svg);
+        background-position: center center;
+        background-size: 24px;
+        background-repeat: no-repeat;
+        color: $default-color;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+        transition: $transition;
+        opacity: 0;
+    }
+
+    input[type="text"] {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: $border-radius;
+    }
+
+    button {
+        background: none;
+        border: none;
+        color: #dc3545;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.itemStatus{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(0, 0, 0, .5);
+
+    button {
+        border: 0;
+        background-color: transparent;
+        color: rgba(255, 255, 255, .3);
+        transition: $transition;
+        font-size: 16px;
+        cursor: pointer;
+
+        &:hover {
+            color: $default-color;
+        }
+    }
+}
