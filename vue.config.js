@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
-module.export = {
+
+module.exports = {
   publicPath: '/todolist/'
 }
