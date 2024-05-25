@@ -3,7 +3,7 @@
 此項目運用了以下技術：
 
 1. **Vue 3**：
-   - 透過 Vue3.js ，以 Vue Composition API 實作出「新增/刪除任務／顯示未完成的待辦事項數量」等功能。
+   - 透過 Vue3.js ，以 Vue Composition API 實作出「新增 / 刪除／顯示未完成的待辦事項數量」等功能。
    
 2. **JavaScript**：
    - 使用 JavaScript (ES6+) 語法來編寫。
